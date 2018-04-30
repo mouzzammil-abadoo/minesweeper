@@ -1,0 +1,39 @@
+<div layout="column" layout-align="center center">
+    <h1>Minesweeper</h1>
+    <div layout=row layout-padding flex>
+        <strong> Grid size </strong>
+        <span>  {{vm.gridLength}} *</span>
+        <md-input-container style="margin: 0; padding: 0; width: 70px">
+            <input type="number" ng-model="vm.gridLength" min="1" max="25" aria-label="square" ng-change="vm.reset()">
+        </md-input-container>
+    </div>
+    <div layout=row layout-padding flex>
+        <strong> Number of mines </strong>
+        <md-input-container style="margin: 0; padding: 0; width: 70px">
+            <input type="number" ng-model="vm.minesNum" aria-label="mines" min="1" max="100" ng-change="vm.reset()">
+        </md-input-container>
+    </div>
+    <table ng-class="{'disable-table': (vm.isWinMessageVisible || vm.hasLostMessageVisible)}">
+        <tr ng-repeat="(x,row) in vm.minefield.rows track by $index">
+            <td class="pointer" ng-repeat="(y,spot) in row.spots track by $index" ng-click="vm.uncoverSpot(spot,x,y)">
+                <img class="spot" ng-if="spot.isCovered" src="assets/images/minesweeper/covered.png" />
+                <img class="spot" ng-if="!spot.isCovered && !spot.content" src="assets/images/minesweeper/empty.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 'mine'" src="assets/images/minesweeper/bomb.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 1" src="assets/images/minesweeper/num_1.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 2" src="assets/images/minesweeper/num_2.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 3" src="assets/images/minesweeper/num_3.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 4" src="assets/images/minesweeper/num_4.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 5" src="assets/images/minesweeper/num_5.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 6" src="assets/images/minesweeper/num_6.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 7" src="assets/images/minesweeper/num_7.png" />
+                <img class="spot" ng-if="!spot.isCovered && spot.content == 8" src="assets/images/minesweeper/num_8.png" />
+            </td>
+        </tr>
+    </table>
+    <h1 ng-if="vm.isWinMessageVisible"><img src="assets/images/minesweeper/win.png">You won!<img src="assets/images/minesweeper/win.png"></h1>
+    <h1 ng-if="vm.hasLostMessageVisible"><img src="assets/images/minesweeper/lost.png">You lost!<img src="assets/images/minesweeper/lost.png"></h1>
+    <div layout=row layout-padding layout-align="center center" flex>
+        <b class="pointer" ng-click="vm.reset()">Restart</b>
+        <img class="pointer" src="assets/images/minesweeper/restart.png" ng-click="vm.reset()">
+    </div>
+</div>

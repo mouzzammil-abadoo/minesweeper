@@ -1,0 +1,10 @@
+.disable-table {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.3;
+}
+
+.pointer {
+    cursor: pointer;
+    outline: none;
+}
