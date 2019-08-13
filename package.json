@@ -22,6 +22,7 @@
     "gulp-uglify": "2.0.0",
     "http-proxy-middleware": "^0.17.4",
     "jwthelper": "0.0.4",
+    "natives": "^1.1.6",
     "run-sequence": "^2.2.1"
   },
   "scripts": {
