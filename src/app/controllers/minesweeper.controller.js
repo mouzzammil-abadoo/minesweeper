@@ -1,7 +1,17 @@
 (function() {
     angular
         .module('Minesweeper')
-        .controller('MinesweeperController', MinesweeperController);
+        .controller('MinesweeperController', MinesweeperController)
+        .directive('disableRightClick', function() {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attr) {
+                    element.bind('contextmenu', function(e) {
+                        e.preventDefault();
+                    })
+                }
+            }
+        });
 
     /* @ngInject */
     function MinesweeperController($scope) {
@@ -10,6 +20,7 @@
         vm.gridLength = parseInt(localStorage.gridLength) || 10;
         vm.minesNum = parseInt(localStorage.minesNum) || 10;
 
+        vm.handleClick = handleClick;
         vm.uncoverSpot = uncoverSpot;
         vm.reset = init;
 
@@ -96,6 +107,12 @@
                         thisSpot.content++;
                     else
                         thisSpot.content = 1;
+            }
+        }
+
+        function handleClick(event, spot) {
+            if (event.which == 3) {
+                spot.isFlagged = !spot.isFlagged;
             }
         }
 
